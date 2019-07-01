@@ -67,21 +67,21 @@ public class Main {
      */
     public static Interface convertStringToInterface(String interfaceString ){
         Interface i = new Interface();
-        i.setAdminStatus(FindAdminStatus(interfaceString));
-        i.setDupleMode(FindDuplexMode(interfaceString));
-        i.setIdAddress(FindIP(interfaceString));
-        i.setIfSpeed(FindSpeed(interfaceString));
-        i.setInterfaceDescription(FindDescription(interfaceString));
-        i.setMacAddress(FindMacAddress(interfaceString));
-        i.setMtu(FindMTU(interfaceString));
-        i.setOperationStatus(FindOperationStatus(interfaceString));
-        i.setName(FindInterfaceName(interfaceString));
+        i.setAdminStatus(findAdminStatus(interfaceString));
+        i.setDupleMode(findDuplexMode(interfaceString));
+        i.setIdAddress(findIP(interfaceString));
+        i.setIfSpeed(findSpeed(interfaceString));
+        i.setInterfaceDescription(findDescription(interfaceString));
+        i.setMacAddress(findMacAddress(interfaceString));
+        i.setMtu(findMTU(interfaceString));
+        i.setOperationStatus(findOperationStatus(interfaceString));
+        i.setName(findInterfaceName(interfaceString));
         return i;
     }
     /*
     * functions analyze interface string
     * */
-    public static String FindInterfaceName(String interfaceString){
+    public static String findInterfaceName(String interfaceString){
         final String regex = "\\A[^\\s]+(?=\\s)";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -90,7 +90,7 @@ public class Main {
         }
     return "";
     }
-    public static String FindAdminStatus(String interfaceString){
+    public static String findAdminStatus(String interfaceString){
         final String regex = "(?<=is ).*(?=,\\sline protocol)";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -99,7 +99,7 @@ public class Main {
         }
         return "";
     }
-    public static String FindOperationStatus(String interfaceString){
+    public static String findOperationStatus(String interfaceString){
         final String regex = "(?<=line protocol is ).*";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -108,7 +108,7 @@ public class Main {
         }
         return "";
     }
-    public static String FindMacAddress(String interfaceString){
+    public static String findMacAddress(String interfaceString){
         final String regex = "[0-9a-f]{4}(.)[0-9a-f]{4}(.)[0-9a-f]{4}";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -117,7 +117,7 @@ public class Main {
         }
         return "";
     }
-    public static String FindDescription(String interfaceString){
+    public static String findDescription(String interfaceString){
         final String regex =  "(?<=Description:).+";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -126,7 +126,7 @@ public class Main {
         }
         return "";
     }
-    public static String FindIP(String interfaceString){
+    public static String findIP(String interfaceString){
         final String regex = "\\d{1,3}[.]\\d{1,3}[.]\\d{1,3}[.]\\d{1,3}";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -135,7 +135,7 @@ public class Main {
         }
         return "";
     }
-    public static String FindMTU(String interfaceString){
+    public static String findMTU(String interfaceString){
         final String regex = "(?<=MTU ).*?(?=,)";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -144,7 +144,7 @@ public class Main {
         }
         return "";
     }
-    public static String FindDuplexMode(String interfaceString){
+    public static String findDuplexMode(String interfaceString){
         final String regex = ".*duplex";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
@@ -153,7 +153,7 @@ public class Main {
         }
         return "";
     }
-    public static String FindSpeed(String interfaceString){
+    public static String findSpeed(String interfaceString){
         final String regex =  "(?<=duplex,).*?(?=,)";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
