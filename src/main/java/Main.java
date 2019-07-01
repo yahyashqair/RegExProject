@@ -7,15 +7,15 @@ import java.util.regex.Pattern;
 
 public class Main {
     // Array of String , such that each String represent interface
-    static ArrayList<String> interfaceAsStrings=new ArrayList<String>();
+    static ArrayList<String> interfaceAsString=new ArrayList<String>();
     // Array of Interfaces
     static ArrayList<Interface> interfaceObjects=new ArrayList<Interface>();
 
     public static void main(String[] args) {
 
         ReadFromFile();
-        for (int i = 0; i < interfaceAsStrings.size(); i++) {
-            interfaceObjects.add(convertStringToInterface(interfaceAsStrings.get(i)));
+        for (int i = 0; i < interfaceAsString.size(); i++) {
+            interfaceObjects.add(convertStringToInterface(interfaceAsString.get(i)));
         }
         System.out.println("We Have #"+interfaceObjects.size());
         for (int i = 0; i <interfaceObjects.size() ; i++) {
@@ -35,25 +35,36 @@ public class Main {
              * */
             File file = new File("C:\\Users\\user\\Documents\\GitHub\\src\\main\\resources\\input.txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
+            /*
+            * Initialize empty string
+             * */
             String st,interfaceString;
             interfaceString="";
+            /*
+            * read lines and store it  in one string
+            * */
             while ((st = br.readLine()) != null){
                 if(st.charAt(0)!=' '){
                     if(interfaceString.length()!=0){
-                        interfaceAsStrings.add(interfaceString);
+                        interfaceAsString.add(interfaceString);
                     }
                     interfaceString=st;
                 }else{
                     interfaceString=interfaceString + "\n" + st;
                 }
                 }
-            interfaceAsStrings.add(interfaceString);
+            // insert the string in Array "interfaceAsString"
+            interfaceAsString.add(interfaceString);
         }catch (Exception e){
             System.out.println("File Not Found ,"+e.getMessage());
         }
     }
 
-
+    /*
+    * Function use all helper function below
+    * Such that take string parameter and
+    * return interface object contain his data
+     */
     public static Interface convertStringToInterface(String interfaceString ){
         Interface i = new Interface();
         i.setAdminStatus(FindAdminStatus(interfaceString));
