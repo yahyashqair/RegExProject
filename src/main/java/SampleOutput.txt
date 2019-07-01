@@ -1,0 +1,37 @@
+We Have #3
+InterFace #1
+
+ name='FastEthernet0/0',
+ idAddress='10.104.58.172',
+ interfaceDescription=' Deployed for EVC eplangki17IR',
+ ifSpeed=' 100Mb/s',
+ dupleMode='  Full-duplex',
+ adminStatus='up',
+ operationStatus='up',
+ macAddress='0007.0e54.a458',
+ mtu='1500 bytes'
+-----------------------------------------
+InterFace #2
+
+ name='FastEthernet0/1',
+ idAddress='192.168.1.1',
+ interfaceDescription='',
+ ifSpeed=' Auto Speed',
+ dupleMode='  Auto-duplex',
+ adminStatus='up',
+ operationStatus='down',
+ macAddress='0007.0e54.a459',
+ mtu='1500 bytes'
+-----------------------------------------
+InterFace #3
+
+ name='Serial0/0/0',
+ idAddress='',
+ interfaceDescription=' testHWICDSU',
+ ifSpeed='',
+ dupleMode='    Half-duplex',
+ adminStatus='administratively down',
+ operationStatus='down',
+ macAddress='',
+ mtu='65 bytes'
+-----------------------------------------
