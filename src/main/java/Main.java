@@ -67,31 +67,21 @@ public class Main {
      */
     public static Interface convertStringToInterface(String interfaceString ){
         Interface i = new Interface();
-        i.setAdminStatus(findAdminStatus(interfaceString));
-        i.setDupleMode(findDuplexMode(interfaceString));
-        i.setIdAddress(findIP(interfaceString));
-        i.setIfSpeed(findSpeed(interfaceString));
-        i.setInterfaceDescription(findDescription(interfaceString));
-        i.setMacAddress(findMacAddress(interfaceString));
-        i.setMtu(findMTU(interfaceString));
-        i.setOperationStatus(findOperationStatus(interfaceString));
-        i.setName(findInterfaceName(interfaceString));
+        i.setAdminStatus(findRegGroup0("(?<=is ).*(?=,\\sline protocol)",interfaceString));
+        i.setDupleMode(findRegGroup0(".*duplex",interfaceString));
+        i.setIdAddress(findRegGroup0("\\d{1,3}[.]\\d{1,3}[.]\\d{1,3}[.]\\d{1,3}",interfaceString));
+        i.setIfSpeed(findRegGroup0("(?<=duplex,).*?(?=,)",interfaceString));
+        i.setInterfaceDescription(findRegGroup0("(?<=Description:).+",interfaceString));
+        i.setMacAddress(findRegGroup0("[0-9a-f]{4}(.)[0-9a-f]{4}(.)[0-9a-f]{4}",interfaceString));
+        i.setMtu(findRegGroup0("(?<=MTU ).*?(?=,)",interfaceString));
+        i.setOperationStatus(findRegGroup0("(?<=line protocol is ).*",interfaceString));
+        i.setName(findRegGroup0("\\A[^\\s]+(?=\\s)",interfaceString));
         return i;
     }
     /*
     * functions analyze interface string
     * */
-    public static String findInterfaceName(String interfaceString){
-        final String regex = "\\A[^\\s]+(?=\\s)";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while(matcher.find()){
-            return matcher.group(0);
-        }
-    return "";
-    }
-    public static String findAdminStatus(String interfaceString){
-        final String regex = "(?<=is ).*(?=,\\sline protocol)";
+    public static String findRegGroup0(String regex,String interfaceString){
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(interfaceString);
         while (matcher.find()) {
@@ -99,68 +89,6 @@ public class Main {
         }
         return "";
     }
-    public static String findOperationStatus(String interfaceString){
-        final String regex = "(?<=line protocol is ).*";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while (matcher.find()) {
-            return matcher.group(0);
-        }
-        return "";
-    }
-    public static String findMacAddress(String interfaceString){
-        final String regex = "[0-9a-f]{4}(.)[0-9a-f]{4}(.)[0-9a-f]{4}";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while (matcher.find()) {
-            return matcher.group(0);
-        }
-        return "";
-    }
-    public static String findDescription(String interfaceString){
-        final String regex =  "(?<=Description:).+";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while (matcher.find()) {
-            return matcher.group(0);
-        }
-        return "";
-    }
-    public static String findIP(String interfaceString){
-        final String regex = "\\d{1,3}[.]\\d{1,3}[.]\\d{1,3}[.]\\d{1,3}";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while (matcher.find()) {
-            return matcher.group(0);
-        }
-        return "";
-    }
-    public static String findMTU(String interfaceString){
-        final String regex = "(?<=MTU ).*?(?=,)";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while (matcher.find()) {
-            return matcher.group(0);
-        }
-        return "";
-    }
-    public static String findDuplexMode(String interfaceString){
-        final String regex = ".*duplex";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while (matcher.find()) {
-            return matcher.group(0);
-        }
-        return "";
-    }
-    public static String findSpeed(String interfaceString){
-        final String regex =  "(?<=duplex,).*?(?=,)";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(interfaceString);
-        while (matcher.find()) {
-            return matcher.group(0);
-        }
-        return "";
-    }
+
 
 }
