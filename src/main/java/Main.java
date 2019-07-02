@@ -9,18 +9,18 @@ public class Main {
     // Array of String , such that each String represent interface
     static ArrayList<String> interfaceAsString=new ArrayList<String>();
     // Array of Interfaces
-    static ArrayList<Interface> interfaceObjects=new ArrayList<Interface>();
+    static ArrayList<Interface> interfaceAsObject=new ArrayList<Interface>();
 
     public static void main(String[] args) {
 
         ReadFromFile();
         for (int i = 0; i < interfaceAsString.size(); i++) {
-            interfaceObjects.add(convertStringToInterface(interfaceAsString.get(i)));
+            interfaceAsObject.add(convertStringToInterface(interfaceAsString.get(i)));
         }
-        System.out.println("We Have #"+interfaceObjects.size());
-        for (int i = 0; i <interfaceObjects.size() ; i++) {
+        System.out.println("We Have #"+interfaceAsObject.size());
+        for (int i = 0; i <interfaceAsObject.size() ; i++) {
             System.out.println("InterFace #"+(i+1));
-            System.out.println(interfaceObjects.get(i));
+            System.out.println(interfaceAsObject.get(i));
             System.out.println("-----------------------------------------");
         }
     }
